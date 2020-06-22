@@ -1,0 +1,16 @@
+{
+  "name": "fortnite-tracker",
+  "version": "1.0.0",
+  "description": "a bot to have fortntie stats.",
+  "main": "core.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "whatland",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "express": "^4.17.1",
+    "request": "^2.88.2"
+  }
+}
