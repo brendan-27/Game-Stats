@@ -1,3 +1,5 @@
+
+
 const botconfig = require("./botconfig.json");
 const discord = require("discord.js");
 const bot = new discord.Client({disableEveryone : true});
@@ -22,13 +24,29 @@ bot.on("message", async msg=>  {
     let cmd = msgArray[0];
     let args = msgArray.slice[0];
 
+    //main bot commands.
 
+    if(cmd == `g!help`) {
+
+        Embed = new discord.MessageEmbed()
+
+
+        //add all of the modules and sub help commands.
+
+
+        msg.channel.send({embed: Embed});
+    }
+ 
+    //fortnite command section.
 
     if(cmd == `f!help`) {
 
         Embed = new discord.MessageEmbed()
 
+        //add help command after main command is finished with.
 
+
+        // 3 modules/
 
         msg.channel.send({embed: Embed});
     }
@@ -243,7 +261,29 @@ bot.on("message", async msg=>  {
 
         
     }
-    
+
+
+
+
+    //start of csgo sections.
+
+
+    if (cmd == `c!help`) {
+
+
+
+
+
+    }
+
+
+    if (cmd == `c!stats`) {
+
+
+
+
+
+    }
 
 
 
