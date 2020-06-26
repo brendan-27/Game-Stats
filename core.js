@@ -5,6 +5,7 @@ const discord = require("discord.js");
 const bot = new discord.Client({disableEveryone : true});
 const colors = require("./colors.json");
 const fetch = require('node-fetch');
+const ow = require('overwatch-stats-api');
 
 
 bot.on("ready", async () => {
@@ -74,10 +75,25 @@ bot.on("message", async msg=>  {
 
         //top 3
         var three = data.lifeTimeStats;
-        console.log(three);
+         //error protection
+         if (three == undefined) {
+
+            Embed = new discord.MessageEmbed()
+            .setColor(colors.blue)
+            .setAuthor("Error: ", bot.user.displayAvatarURL())
+            .setThumbnail(bot.user.displayAvatarURL())
+
+
+            .setDescription("That is not a valid username.")
+
+
+
+
+            msg.channel.send({embed: Embed});
+            return
+        }
         three = three[1];
         three = Object.values(three);
-        console.log(three);
         //top 10
         var ten = data.lifeTimeStats;
         ten = ten[3];
@@ -144,10 +160,27 @@ bot.on("message", async msg=>  {
 
         //top 3
         var three = data.lifeTimeStats;
-        console.log(three);
+         //error protection
+         if (three == undefined) {
+
+            Embed = new discord.MessageEmbed()
+            .setColor(colors.blue)
+            .setAuthor("Error: ", bot.user.displayAvatarURL())
+            .setThumbnail(bot.user.displayAvatarURL())
+
+
+            .setDescription("That is not a valid username.")
+
+
+
+
+            msg.channel.send({embed: Embed});
+            return
+        }
+        
         three = three[1];
         three = Object.values(three);
-        console.log(three);
+        
         //top 10
         var ten = data.lifeTimeStats;
         ten = ten[3];
@@ -215,10 +248,31 @@ bot.on("message", async msg=>  {
 
         //top 3
         var three = data.lifeTimeStats;
-        console.log(three);
+        //error protection
+        if (three == undefined) {
+
+            Embed = new discord.MessageEmbed()
+            .setColor(colors.blue)
+            .setAuthor("Error: ", bot.user.displayAvatarURL())
+            .setThumbnail(bot.user.displayAvatarURL())
+
+
+            .setDescription("That is not a valid username.")
+
+
+
+
+            msg.channel.send({embed: Embed});
+            return
+        }
+
+        
         three = three[1];
+        
+        
+
         three = Object.values(three);
-        console.log(three);
+        
         //top 10
         var ten = data.lifeTimeStats;
         ten = ten[3];
@@ -233,7 +287,7 @@ bot.on("message", async msg=>  {
         kills = Object.values(kills);
         //wins 
         var wins = data.lifeTimeStats;
-        wins = wins[9];
+        wins = wins[8];
         wins = Object.values(wins);
         //k/d
         var kd = data.lifeTimeStats;
@@ -264,10 +318,31 @@ bot.on("message", async msg=>  {
 
 
 
+    if (cmd == `f!itemshop`) {
+
+        //working but need to figure out how to parse data and get images and set it up in a command properly.
+        const response = await fetch("https://api.fortnitetracker.com/v1/store", {
+
+            headers : {
+                'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
+            }
+
+        });
+        const data = await response.json();
+
+        console.log(data);
+
+
+
+
+    }
+
+
+
 
     //start of csgo sections.
 
-
+    //cur disabled
     if (cmd == `c!help`) {
 
 
@@ -278,6 +353,33 @@ bot.on("message", async msg=>  {
 
 
     if (cmd == `c!stats`) {
+        var newStr = "";
+
+        var arg2 = msg.content.slice(prefix.length).split(' ');
+        
+        var argRep = arg2[1].toLowerCase()
+
+        newStr = arg2[1];
+
+        const response = await fetch("https://public-api.tracker.gg/v2/csgo/standard/profile/steam/" + newStr, {
+
+            headers : {
+                'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
+            }
+
+        });
+        const data = await response.json();
+
+        console.log(data);
+
+
+
+
+    }
+
+    //start of overwatch section.
+    if (cmd == `o!help`) {
+
 
 
 
@@ -285,6 +387,20 @@ bot.on("message", async msg=>  {
 
     }
 
+
+    if (cmd == `o!stats`) {
+        //working OW stats, need to parse and get a system for naming.
+        (async () => {
+          const stats = await ow.getAllStats('HusseinObama-11715', 'pc');
+          console.log(stats);
+        })();
+
+
+
+
+    }
+
+    
 
 
 })
