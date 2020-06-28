@@ -53,7 +53,6 @@ bot.on("message", async msg=>  {
     }
 
     if (cmd == `f!xbl`) {
-
         var newStr = "";
 
         var arg2 = msg.content.slice(prefix.length).split(' ');
