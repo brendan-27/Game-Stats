@@ -71,7 +71,6 @@ bot.on("message", async msg=>  {
 
         });
         const data = await response.json();
-
         //top 3
         var three = data.lifeTimeStats;
          //error protection
