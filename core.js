@@ -1,4 +1,4 @@
-
+//started update on 9/17. games include OW and FN and Siege.
 
 const botconfig = require("./botconfig.json");
 const discord = require("discord.js");
@@ -316,25 +316,7 @@ bot.on("message", async msg=>  {
 
 
 
-    if (cmd == `f!itemshop`) {
-
-        //working but need to figure out how to parse data and get images and set it up in a command properly.
-        const response = await fetch("https://api.fortnitetracker.com/v1/store", {
-
-            headers : {
-                'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
-            }
-
-        });
-        const data = await response.json();
-
-        console.log(data);
-
-
-
-
-    }
-
+   
 
 
 
