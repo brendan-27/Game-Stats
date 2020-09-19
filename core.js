@@ -10,7 +10,7 @@ const ow = require('overwatch-stats-api');
 
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is online!`)
-    bot.user.setActivity("Video Games | g!help");
+    bot.user.setActivity("Gaming | g!help");
 
     
 })
@@ -370,8 +370,17 @@ bot.on("message", async msg=>  {
 
     if (cmd == `o!stats`) {
         //working OW stats, need to parse and get a system for naming.
+
+        var newStrName = "";
+
+        var arg2 = msg.content.slice(prefix.length).split(' ');
+        
+        var argRep = arg2[1].toLowerCase()
+
+        newStrName = arg2[1];
+        
         (async () => {
-          const stats = await ow.getAllStats('HusseinObama-11715', 'pc');
+          const stats = await ow.getAllStats(newStrName, 'pc');
           console.log(stats);
         })();
 
