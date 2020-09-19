@@ -118,7 +118,7 @@ bot.on("message", async msg=>  {
         Embed = new discord.MessageEmbed()
         .setColor(colors.blue)
         .setAuthor( newStr + " Fortnite Stats: ", bot.user.displayAvatarURL())
-        .setThumbnail(bot.user.displayAvatarURL())
+        .setThumbnail(bot.user.displayAvatarURL()) // set custom avatar
 
         .addField("Top 3:", three[1])
         .addField("Top 10:", ten[1])
@@ -205,7 +205,7 @@ bot.on("message", async msg=>  {
         Embed = new discord.MessageEmbed()
         .setColor(colors.blue)
         .setAuthor( newStr + " Fortnite Stats: ", bot.user.displayAvatarURL())
-        .setThumbnail(bot.user.displayAvatarURL())
+        .setThumbnail(bot.user.displayAvatarURL()) // set custom avatar
 
         .addField("Top 3:", three[1])
         .addField("Top 10:", ten[1])
@@ -297,7 +297,7 @@ bot.on("message", async msg=>  {
         Embed = new discord.MessageEmbed()
         .setColor(colors.blue)
         .setAuthor( newStr + " Fortnite Stats: ", bot.user.displayAvatarURL())
-        .setThumbnail(bot.user.displayAvatarURL())
+        .setThumbnail(bot.user.displayAvatarURL()) // set custom avatar
 
         .addField("Top 3:", three[1])
         .addField("Top 10:", ten[1])
@@ -321,7 +321,7 @@ bot.on("message", async msg=>  {
 
 
     //start of csgo sections.
-
+    //need work
     //cur disabled
     if (cmd == `c!help`) {
 
@@ -356,7 +356,7 @@ bot.on("message", async msg=>  {
 
 
     }
-
+    //working
     //start of overwatch section.
     if (cmd == `o!help`) {
 
@@ -378,11 +378,30 @@ bot.on("message", async msg=>  {
         var argRep = arg2[1].toLowerCase()
 
         newStrName = arg2[1];
-        
+
         (async () => {
           const stats = await ow.getAllStats(newStrName, 'pc');
           console.log(stats);
+
+          //console.log(stats["battletag"]);
         })();
+
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.yellow)
+        .setAuthor( newStrName + " Overwatch Stats: ", bot.user.displayAvatarURL())
+        .setThumbnail(bot.user.displayAvatarURL()) // need to set  so i have a custom background (overwatch) PLACE PLAYER ICON.
+
+
+        .addField("Battle Tag: ", stats["battletag"])
+        .addField("Level: ", stats["level"])
+
+
+
+
+
+
+        .setFooter("Overwatch Stats | o!help")
+        msg.channel.send({embed: Embed});
 
 
 
