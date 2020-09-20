@@ -379,12 +379,12 @@ bot.on("message", async msg=>  {
 
         newStrName = arg2[1];
 
-        (async () => {
-          const stats = await ow.getAllStats(newStrName, 'pc');
-          console.log(stats);
+        
+        const stats = await ow.getAllStats(newStrName, 'pc');
 
-          //console.log(stats["battletag"]);
-        })();
+        console.log(stats);
+
+        
 
         Embed = new discord.MessageEmbed()
         .setColor(colors.yellow)
@@ -394,6 +394,9 @@ bot.on("message", async msg=>  {
 
         .addField("Battle Tag: ", stats["battletag"])
         .addField("Level: ", stats["level"])
+        .addField("Prestige: ", stats["prestige"])
+        //.addField("Endorsments: ", stats.endorsements["shotcaller"])
+
 
 
 
