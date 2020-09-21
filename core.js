@@ -379,25 +379,42 @@ bot.on("message", async msg=>  {
 
         newStrName = arg2[1];
 
-        
         const stats = await ow.getAllStats(newStrName, 'pc');
 
-        console.log(stats);
+
+        //REVIST THIS NEED A FUTURE FIX
+
+        /*if(undefined == 'substring') {
+            Embed = new discord.MessageEmbed()
+            .setColor(colors.yellow)
+            .setAuthor("Error: ", bot.user.displayAvatarURL())
+
+            .setDescription("Profile is not found, use o!help to see commands.")
+
+            .setFooter("Overwatch Stats | o!help")
+            msg.channel.send({embed: Embed});
+        }*/
+
+
+        
+
+        //console.log(stats);
+
+
+        var profPic = stats.iconURL; 
 
         
 
         Embed = new discord.MessageEmbed()
         .setColor(colors.yellow)
         .setAuthor( newStrName + " Overwatch Stats: ", bot.user.displayAvatarURL())
-        .setThumbnail(bot.user.displayAvatarURL()) // need to set  so i have a custom background (overwatch) PLACE PLAYER ICON.
+        .setThumbnail(profPic) // need to set  so i have a custom background (overwatch) PLACE PLAYER ICON.
 
 
         .addField("Battle Tag: ", stats["battletag"])
         .addField("Level: ", stats["level"])
         .addField("Prestige: ", stats["prestige"])
-        //.addField("Endorsments: ", stats.endorsements["shotcaller"])
-
-
+        .addField("Endorsments: ", "Shotcaller: " + stats.endorsements["shotcaller"] + ", Teammate: " + stats.endorsements["teammate"] + ", Sportsmanship: " + stats.endorsements["sportsmanship"])
 
 
 
