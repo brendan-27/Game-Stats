@@ -1,5 +1,10 @@
 //started update on 9/17. games include OW and FN and Siege.
 
+
+
+
+//main central commands: api, help, sub helps for all games. 
+
 const botconfig = require("./botconfig.json");
 const discord = require("discord.js");
 const bot = new discord.Client({disableEveryone : true});
@@ -361,6 +366,12 @@ bot.on("message", async msg=>  {
     if (cmd == `o!help`) {
 
 
+        //simple embed of what to do, api stuff and talk about response time.
+
+
+        //teach how to find their id and how to type the command. 
+
+
 
 
 
@@ -396,12 +407,12 @@ bot.on("message", async msg=>  {
         }*/
 
 
-        
-
-        //console.log(stats);
-
-
         var profPic = stats.iconURL; 
+
+        var heroes = stats.heroStats.competitive;
+
+
+        console.log(heroes);
 
         
 
@@ -415,6 +426,13 @@ bot.on("message", async msg=>  {
         .addField("Level: ", stats["level"])
         .addField("Prestige: ", stats["prestige"])
         .addField("Endorsments: ", "Shotcaller: " + stats.endorsements["shotcaller"] + ", Teammate: " + stats.endorsements["teammate"] + ", Sportsmanship: " + stats.endorsements["sportsmanship"])
+        .setImage("https://d15f34w2p8l1cc.cloudfront.net/overwatch/625645c3c9af49eb315b504dba32137bb4081d348ec5b9750196b0ec0c9bb6a6.png") //BORDER TO SEE WHAT LEVEL
+        //  (STARS).setImage("https://d15f34w2p8l1cc.cloudfront.net/overwatch/605c201cf3f0d24b318f643acb812084ff284e660f2bb5d62b487847d33fad29.png")
+
+
+
+        .addField("Total Damage Done: ", heroes.overall.combat.all_damage_done)
+        .addField("Barrier Damage Done: ", heroes.overall.combat.barrier_damage_done)
 
 
 
