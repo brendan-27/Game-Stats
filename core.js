@@ -426,13 +426,18 @@ bot.on("message", async msg=>  {
         .addField("Level: ", stats["level"])
         .addField("Prestige: ", stats["prestige"])
         .addField("Endorsments: ", "Shotcaller: " + stats.endorsements["shotcaller"] + ", Teammate: " + stats.endorsements["teammate"] + ", Sportsmanship: " + stats.endorsements["sportsmanship"])
+
+
         .setImage("https://d15f34w2p8l1cc.cloudfront.net/overwatch/625645c3c9af49eb315b504dba32137bb4081d348ec5b9750196b0ec0c9bb6a6.png") //BORDER TO SEE WHAT LEVEL
+
+
         //  (STARS).setImage("https://d15f34w2p8l1cc.cloudfront.net/overwatch/605c201cf3f0d24b318f643acb812084ff284e660f2bb5d62b487847d33fad29.png")
-
-
 
         .addField("Total Damage Done: ", heroes.overall.combat.all_damage_done)
         .addField("Barrier Damage Done: ", heroes.overall.combat.barrier_damage_done)
+        .addField("Total Deaths: ", heroes.overall.combat.deaths)
+        .addField("Total Eliminations: ", heroes.overall.combat.eliminations)
+        .addField("Total Objective Time: ", heroes.overall.combat.objective_time)
 
 
 
