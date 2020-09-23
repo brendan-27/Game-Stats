@@ -409,10 +409,10 @@ bot.on("message", async msg=>  {
 
         var profPic = stats.iconURL; 
 
-        var heroes = stats.heroStats.competitive;
+        var compHeroes = stats.heroStats.competitive;
 
 
-        console.log(heroes);
+        console.log(compHeroes);
 
         
 
@@ -433,11 +433,15 @@ bot.on("message", async msg=>  {
 
         //  (STARS).setImage("https://d15f34w2p8l1cc.cloudfront.net/overwatch/605c201cf3f0d24b318f643acb812084ff284e660f2bb5d62b487847d33fad29.png")
 
-        .addField("Total Damage Done: ", heroes.overall.combat.all_damage_done)
-        .addField("Barrier Damage Done: ", heroes.overall.combat.barrier_damage_done)
-        .addField("Total Deaths: ", heroes.overall.combat.deaths)
-        .addField("Total Eliminations: ", heroes.overall.combat.eliminations)
-        .addField("Total Objective Time: ", heroes.overall.combat.objective_time)
+        .addField("Comp: Total Damage Done: ", compHeroes.overall.combat.all_damage_done)
+        .addField("Comp: Barrier Damage Done: ", compHeroes.overall.combat.barrier_damage_done)
+        .addField("Comp: Total Deaths: ", compHeroes.overall.combat.deaths)
+        .addField("Comp: Total Eliminations: ", compHeroes.overall.combat.eliminations)
+        .addField("Comp: Total Objective Time: ", compHeroes.overall.combat.objective_time)
+        .addField("Comp (Total): Loses", compHeroes.overall.game.games_lost)
+        .addField("Comp (Total): Played", compHeroes.overall.game.games_played)
+        .addField("Comp (Total): Wins", compHeroes.overall.game.games_won)
+        .addField("Comp (Total): ", compHeroes.overall.game.time_played)
 
 
 
