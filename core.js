@@ -369,7 +369,30 @@ bot.on("message", async msg=>  {
         //simple embed of what to do, api stuff and talk about response time.
 
 
-        //teach how to find their id and how to type the command. 
+        //teach how to find their id and how to type the command.
+        
+
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.yellow)
+        .setAuthor("Overwatch Stats Help: ", bot.user.displayAvatarURL())
+        .setThumbnail(bot.user.displayAvatarURL())
+        
+        .setTitle("How to use the Overwatch Section")
+        .addField("Use: ", "o!stats {PlayerName-(playertag)")
+        .addField("Example: ", "o!stats KSAA-21785")
+        .addField("API: ", "The API callback can take anywhere from 0 seconds to 5 seconds.")
+        .addField("Errors: ", "If there is no API response after 5 seconds, the account is either private or not found, so please re-try or ask them to public their account.")
+        .addField("Public Profiles: ", "To make your profile public go ingame to options -> social -> career profile visibility: PUBLIC")
+
+
+        
+
+
+
+
+
+        .setFooter("Overwatch Stats | o!help")
+        msg.channel.send({embed: Embed});
 
 
 
