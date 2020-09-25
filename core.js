@@ -361,7 +361,13 @@ bot.on("message", async msg=>  {
 
 
     }
-    //working
+    //working 05%s
+
+
+
+
+
+    //95% still needs a bit of touching up but will visit back to it in the future.
     //start of overwatch section.
     if (cmd == `o!help`) {
 
