@@ -134,7 +134,7 @@ bot.on("message", async msg=>  {
 
 
 
-        .setFooter("Fortnite Stats | g!help")
+        .setFooter("Fortnite Stats | f!help | " + msg.createdAt)
         msg.channel.send({embed: Embed});
 
         
@@ -221,7 +221,7 @@ bot.on("message", async msg=>  {
 
 
 
-        .setFooter("Fortnite Stats | g!help")
+        .setFooter("Fortnite Stats | f!help | " + msg.createdAt)
         msg.channel.send({embed: Embed});
 
         
@@ -313,7 +313,7 @@ bot.on("message", async msg=>  {
 
 
 
-        .setFooter("Fortnite Stats | g!help")
+        .setFooter("Fortnite Stats | f!help | " + msg.createdAt)
         msg.channel.send({embed: Embed});
 
         
@@ -378,20 +378,14 @@ bot.on("message", async msg=>  {
         .setThumbnail(bot.user.displayAvatarURL())
         
         .setTitle("How to use the Overwatch Section")
-        .addField("Use: ", "o!stats {PlayerName-(playertag)")
+        .addField("Use: ", "o!stats {PlayerName-(playertag)}")
         .addField("Example: ", "o!stats KSAA-21785")
         .addField("API: ", "The API callback can take anywhere from 0 seconds to 5 seconds.")
         .addField("Errors: ", "If there is no API response after 5 seconds, the account is either private or not found, so please re-try or ask them to public their account.")
         .addField("Public Profiles: ", "To make your profile public go ingame to options -> social -> career profile visibility: PUBLIC")
 
 
-        
-
-
-
-
-
-        .setFooter("Overwatch Stats | o!help")
+        .setFooter("Overwatch Stats | o!help | " + msg.createdAt)
         msg.channel.send({embed: Embed});
 
 
@@ -470,7 +464,7 @@ bot.on("message", async msg=>  {
 
 
 
-        .setFooter("Overwatch Stats | o!help")
+        .setFooter("Overwatch Stats | o!help | " + msg.createdAt)
         msg.channel.send({embed: Embed});
 
 
