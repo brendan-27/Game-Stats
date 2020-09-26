@@ -11,11 +11,7 @@ const bot = new discord.Client({disableEveryone : true});
 const colors = require("./colors.json");
 const fetch = require('node-fetch');
 const ow = require('overwatch-stats-api');
-const RainbowSixApi = require('rainbowsix-api-node');
-const R6 = new RainbowSixApi();
 
-let username = 'Timothy_Chaz';
-let platform = 'uplay'
 
 
 bot.on("ready", async () => {
@@ -502,16 +498,19 @@ bot.on("message", async msg=>  {
 
     if(cmd == 'r6!stats') {
 
+        var newStr = "";
 
-        //Get stats on the user on that platform
-        R6.stats(username, platform/*optional true or false if you want operator details or not*/).then(response => {
-            console.log(response);
-        }).catch(error => {
-            console.error(error)
-        });
+        var arg2 = msg.content.slice(prefix.length).split(' ');
         
-        
+        var argRep = arg2[1].toLowerCase()
 
+        newStr = arg2[1];
+
+        const response = await fetch("https://r6.apitab.com/search/uplay/" + newStr);
+
+
+
+        console.log(response)
 
 
 
