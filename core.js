@@ -518,7 +518,7 @@ bot.on("message", async msg=>  {
         console.log(data);
 
 
-        msg.channel.send("This players id is " + data.userId);
+        msg.channel.send("This players id is " + data['userId']);
 
 
 
