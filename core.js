@@ -13,6 +13,15 @@ const fetch = require('node-fetch');
 const ow = require('overwatch-stats-api');
 
 
+const R6API = require('r6api.js');
+const r6api = new R6API('cifotix134@vmgmails.com', 'coolkid988');
+
+let username = 'Le_Whatland';
+let platform = 'uplay';
+        
+
+
+
 
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is online!`)
@@ -492,25 +501,42 @@ bot.on("message", async msg=>  {
 
 
 
+    }
+
+
+    if(cmd == "r6!getid" || cmd == "r6!getID"){
+
+        var newStrName = "";
+
+        var arg2 = msg.content.slice(prefix.length).split(' ');
+        
+        var argRep = arg2[1].toLowerCase()
+
+        newStrName = arg2[1];
+
+        const data = await r6api.getId('uplay', newStrName);
+        console.log(data);
+
+
+        msg.channel.send("This players id is " + data.userId);
+
+
+
+
 
     }
 
 
     if(cmd == 'r6!stats') {
 
-        var newStr = "";
-
-        var arg2 = msg.content.slice(prefix.length).split(' ');
         
-        var argRep = arg2[1].toLowerCase()
-
-        newStr = arg2[1];
-
-        const response = await fetch("https://r6.apitab.com/search/uplay/" + newStr);
+        //example: console.log(`${username} has played ${stats.pvp.general.matches} matches.`);
 
 
 
-        console.log(response)
+        const data = await r6api.getStats('uplay', 'ids');
+
+
 
 
 
