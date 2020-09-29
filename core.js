@@ -518,7 +518,7 @@ bot.on("message", async msg=>  {
         console.log(data);
 
 
-        msg.channel.send("This players id is " + data['userId']);
+        msg.channel.send("This players id is " + data[0].userId);
 
 
 
@@ -533,11 +533,42 @@ bot.on("message", async msg=>  {
         //example: console.log(`${username} has played ${stats.pvp.general.matches} matches.`);
 
 
+        var newStrName = "";
 
-        const data = await r6api.getStats('uplay', 'ids');
+        var arg2 = msg.content.slice(prefix.length).split(' ');
+        
+        var argRep = arg2[1].toLowerCase()
+
+        newStrName = arg2[1];
 
 
+        const name = await r6api.getUsername('uplay', newStrName);
+        const data = await r6api.getStats('uplay', newStrName);
 
+        //console.log(name);
+
+        console.log(data);
+        //console.log(name)
+
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.blue)
+        .setAuthor( data[0].username + " Rainbow Six Siege Stats: ", bot.user.displayAvatarURL()) //fix name
+        .setThumbnail(bot.user.displayAvatarURL()) 
+
+
+        .addField("Total Kills: ", data[0].pvp.general.kills)
+        .addField("Total Deaths: ", data[0].pvp.general.deaths)
+        .addField("Total Assists: ", data[0].pvp.general.assists)
+        .addField("Total Headshots: ", data[0].pvp.general.heashots)
+        .addField("Total Matches: ", data[0].pvp.general.matches)
+        .addField("Total Wins: ", data[0].pvp.general.wins)
+        .addField("Total Losses: ", data[0].pvp.general.losses)
+
+
+        //add more
+
+        .setFooter("R6 Seige Stats | r6!help | " + msg.createdAt)
+        msg.channel.send({embed: Embed});
 
 
 
