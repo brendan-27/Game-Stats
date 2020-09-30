@@ -18,6 +18,12 @@ const r6api = new R6API('cifotix134@vmgmails.com', 'coolkid988');
 
 let username = 'Le_Whatland';
 let platform = 'uplay';
+
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
+
         
 
 
@@ -39,6 +45,40 @@ bot.on("message", async msg=>  {
     let msgArray = msg.content.split(" ");
     let cmd = msgArray[0];
     let args = msgArray.slice[0];
+
+
+
+
+    //api 
+
+    if (cmd == `${prefix}ping`) {
+        
+        msg.channel.send("Connecting To Server...").then(m => {
+            var ping = m.createdTimestamp - msg.createdTimestamp;
+            var botPing = Math.round(bot.ping);
+
+
+            m.edit(`Bot Ping: ${ping}`)
+        })
+
+
+    }
+
+    if(cmd == `${prefix}stats`) {
+
+        Embed = new discord.MessageEmbed()
+        
+        .setColor(colors.blue)
+        .setAuthor("Game Stats", bot.user.displayAvatarURL())
+        
+        .addField("Total Servers: ", numberWithCommas(bot.guilds.cache.size))
+        .addField("Total Members: ", numberWithCommas(bot.users.cache.size))
+
+        .setFooter("Game Stats | g!help | " + msg.createdAt)
+        msg.channel.send({embed: Embed});
+    }
+
+  
 
     //main bot commands.
 
