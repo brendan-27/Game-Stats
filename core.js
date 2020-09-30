@@ -365,7 +365,7 @@ bot.on("message", async msg=>  {
         });
         const data = await response.json();
 
-        console.log(data);
+        //console.log(data);
 
 
 
@@ -445,7 +445,7 @@ bot.on("message", async msg=>  {
         var compHeroes = stats.heroStats.competitive;
 
 
-        console.log(compHeroes);
+        //console.log(compHeroes);
 
         
 
@@ -570,7 +570,7 @@ bot.on("message", async msg=>  {
         Embed = new discord.MessageEmbed()
         .setColor(colors.blue)
         .setAuthor( idplayer + " Player ID Rainbow Six Siege Stats: ", bot.user.displayAvatarURL()) //fix name
-        .setThumbnail(bot.user.displayAvatarURL()) 
+        .setThumbnail('https://cdn.discordapp.com/attachments/761009105053286430/761009632264716288/1660365744607238c5_720x720.png') 
 
 
         .addField("Total Kills: ", data[0].pvp.general.kills)
