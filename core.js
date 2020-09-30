@@ -547,19 +547,19 @@ bot.on("message", async msg=>  {
 
         //console.log(name);
 
-        console.log(data);
+        console.log(data[0].pvp.general);
         //console.log(name)
 
         Embed = new discord.MessageEmbed()
         .setColor(colors.blue)
-        .setAuthor( data[0].username + " Rainbow Six Siege Stats: ", bot.user.displayAvatarURL()) //fix name
+        .setAuthor( newStrName + " Player ID Rainbow Six Siege Stats: ", bot.user.displayAvatarURL()) //fix name
         .setThumbnail(bot.user.displayAvatarURL()) 
 
 
         .addField("Total Kills: ", data[0].pvp.general.kills)
         .addField("Total Deaths: ", data[0].pvp.general.deaths)
         .addField("Total Assists: ", data[0].pvp.general.assists)
-        .addField("Total Headshots: ", data[0].pvp.general.heashots)
+        .addField("Total Headshots: ", data[0].pvp.general.headshots)
         .addField("Total Matches: ", data[0].pvp.general.matches)
         .addField("Total Wins: ", data[0].pvp.general.wins)
         .addField("Total Losses: ", data[0].pvp.general.losses)
