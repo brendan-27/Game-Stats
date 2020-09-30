@@ -503,18 +503,18 @@ bot.on("message", async msg=>  {
 
     }
 
-
+    
     if(cmd == "r6!getid" || cmd == "r6!getID"){
 
-        var newStrName = "";
+        var newStrName1 = "";
 
-        var arg2 = msg.content.slice(prefix.length).split(' ');
-        
-        var argRep = arg2[1].toLowerCase()
+        var arg3 = msg.content.slice(prefix.length).split(' ');
+            
+        var argRep2 = arg3[1].toLowerCase()
 
-        newStrName = arg2[1];
+        newStrName1 = arg3[1];
 
-        const data = await r6api.getId('uplay', newStrName);
+        const data2 = await r6api.getId('uplay', newStrName1);
         console.log(data);
 
 
@@ -532,18 +532,35 @@ bot.on("message", async msg=>  {
         
         //example: console.log(`${username} has played ${stats.pvp.general.matches} matches.`);
 
+        var newStrName1 = "";
 
-        var newStrName = "";
+        var arg3 = msg.content.slice(prefix.length).split(' ');
+        
+        var argRep2 = arg3[1].toLowerCase()
+
+        newStrName1 = arg3[1];
+
+        const data2 = await r6api.getId('uplay', newStrName1);
+        
+        var idplayer = data2[0].userId;
+
+
+        //msg.channel.send("This players id is " + data[0].userId);
+
+        //div
+
+
+        /*var newStrName = "";
 
         var arg2 = msg.content.slice(prefix.length).split(' ');
         
         var argRep = arg2[1].toLowerCase()
 
-        newStrName = arg2[1];
+        newStrName = arg2[1];*/
 
 
-        const name = await r6api.getUsername('uplay', newStrName);
-        const data = await r6api.getStats('uplay', newStrName);
+        
+        const data = await r6api.getStats('uplay', idplayer);
 
         //console.log(name);
 
@@ -552,7 +569,7 @@ bot.on("message", async msg=>  {
 
         Embed = new discord.MessageEmbed()
         .setColor(colors.blue)
-        .setAuthor( newStrName + " Player ID Rainbow Six Siege Stats: ", bot.user.displayAvatarURL()) //fix name
+        .setAuthor( idplayer + " Player ID Rainbow Six Siege Stats: ", bot.user.displayAvatarURL()) //fix name
         .setThumbnail(bot.user.displayAvatarURL()) 
 
 
