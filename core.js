@@ -403,9 +403,9 @@ bot.on("message", async msg=>  {
             }
 
         });
-        const data = await response.json();
+        const datac = await response.json();
 
-        //console.log(data);
+        console.log(datac.data.platformInfo.segments);
 
 
 
@@ -538,8 +538,21 @@ bot.on("message", async msg=>  {
     if (cmd == 'r6!help') {
 
         //func
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.yellow)
+        .setAuthor("R6 Stats Help: ", bot.user.displayAvatarURL())
+        .setThumbnail(bot.user.displayAvatarURL())
+        
+        .setTitle("How to use the Rainbow Six Siege Section")
+        .addField("Use: ", "r6!stats {PlayerName}")
+        .addField("Example: ", "r6!stats Le_Whatlands")
+        .addField("API: ", "The API callback can take anywhere from 0 seconds to 5 seconds.")
+        .addField("Errors: ", "If there is no API response after 5 seconds, the account is either private or not found..")
+        //.addField("Public Profiles: ", "To make your profile public go ingame to options -> social -> career profile visibility: PUBLIC")
 
 
+        .setFooter("R6 Stats | r6!help | " + msg.createdAt)
+        msg.channel.send({embed: Embed});
 
     }
 
