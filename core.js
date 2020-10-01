@@ -31,10 +31,23 @@ function numberWithCommas(x) {
 
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is online!`)
-    bot.user.setActivity("Gaming | g!help");
 
+    //bot.user.setActivity("Gaming | g!help");
     
 })
+
+
+let statuses = [`Rainbow Six Siege`, "g!help", "Games", `Overwatch`]
+
+setInterval(function() {
+
+
+    let status = statuses[Math.floor(Math.random() * statuses.length)];
+
+    bot.user.setActivity(status, {type: "WATCHING"});
+
+
+}, 500000)
 
 
 bot.on("message", async msg=>  {
