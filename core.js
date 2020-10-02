@@ -395,6 +395,22 @@ bot.on("message", async msg=>  {
     //apex legends
     if (cmd == `a!help`) {
 
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.orange)
+        .setAuthor("Apex Legends Stats Help: ", bot.user.displayAvatarURL())
+        .setThumbnail(bot.user.displayAvatarURL())
+        
+        .setTitle("How to use the Apex Legends Section")
+        .addField("Use: ", "a!stats {PlayerName}")
+        .addField("Example: ", "a!stats Twitch_Apryze")
+        .addField("API: ", "The API callback can take anywhere from 0 seconds to 5 seconds.")
+        .addField("Errors: ", "If there is no API response after 5 seconds, the account is not found, so please re-try with different spelling.")
+        
+
+
+        .setFooter("Apex Legends Stats | a!help | " + msg.createdAt)
+        msg.channel.send({embed: Embed});
+
 
 
 
@@ -419,13 +435,13 @@ bot.on("message", async msg=>  {
 
         });
         const datac = await response.json();
-        //console.log(datac.data.platformInfo.avatarUrl);
+        //console.log(datac.data.platformInfo.platformUserId);
         var profPic1 = datac.data.platformInfo.avatarUrl;
         //console.log(datac.data.segments[0]);
 
         Embed = new discord.MessageEmbed()
         .setColor(colors.orange)
-        .setAuthor(" Player Apex Legends Stats: ", bot.user.displayAvatarURL()) //fix name
+        .setAuthor(datac.data.platformInfo.platformUserId + " Player Apex Legends Stats: ", bot.user.displayAvatarURL()) //fix name
         .setThumbnail(profPic1)  // fix
 
 
