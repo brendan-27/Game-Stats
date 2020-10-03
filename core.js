@@ -477,6 +477,24 @@ bot.on("message", async msg=>  {
     if (cmd == `c!help`) {
 
 
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.cyan)
+        .setAuthor("CSGO Stats Help: ", bot.user.displayAvatarURL())
+        .setThumbnail(bot.user.displayAvatarURL())
+        
+        .setTitle("How to use the CSGO Section")
+        .addField("Use: ", "a!stats {PlayerName}")
+        .addField("Example: ", "a!stats [name]")
+        .addField("API: ", "The API callback can take anywhere from 0 seconds to 5 seconds.")
+        .addField("Errors: ", "If there is no API response after 5 seconds, the account is not found or is private, so please re-try with different spelling or ask them to public their acct.")
+        
+
+
+        .setFooter("CSGO Stats | a!help | " + msg.createdAt)
+        msg.channel.send({embed: Embed});
+
+
+
 
 
 
@@ -501,7 +519,42 @@ bot.on("message", async msg=>  {
         });
         const datac = await response.json();
 
-        console.log(datac.data.platformInfo.segments);
+
+        //console.log(datac);
+
+
+
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.cyan)
+        .setAuthor(datac.data.platformInfo.platformUserHandle + " Player CSGO Legends Stats: ", bot.user.displayAvatarURL()) 
+        .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
+
+
+        .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
+        .addField("Total Kills: ", datac.data.segments[0].stats.kills.displayValue)
+        .addField("Total Deaths: ", datac.data.segments[0].stats.deaths.displayValue)
+        .addField("KD: ", datac.data.segments[0].stats.kd.displayValue)
+        .addField("Total Damage: ", datac.data.segments[0].stats.damage.displayValue)
+        .addField("Total Headshots: ", datac.data.segments[0].stats.headshots.displayValue)
+        .addField("Total Shots Fired: ", datac.data.segments[0].stats.shotsFired.displayValue)
+        .addField("Total Shots Hit: ", datac.data.segments[0].stats.shotsHit.displayValue)
+        .addField("Shot Accuracy: ", datac.data.segments[0].stats.shotsAccuracy.displayValue)
+        .addField("Bombs Planted: ", datac.data.segments[0].stats.bombsPlanted.displayValue)
+        .addField("Bombs Defused: ", datac.data.segments[0].stats.bombsDefused.displayValue)
+        .addField("Money Earned: ", datac.data.segments[0].stats.moneyEarned.displayValue)
+        .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
+        .addField("Loses: ", datac.data.segments[0].stats.losses.displayValue)
+        .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
+        .addField("Win Loss %: ", datac.data.segments[0].stats.wlPercentage.displayValue)
+        .addField("HS %: ", datac.data.segments[0].stats.headshotPct.displayValue)
+
+        
+        
+
+        //add more
+
+        .setFooter("Apex Legends Stats | a!help | " + msg.createdAt)
+        msg.channel.send({embed: Embed});
 
 
 
@@ -635,7 +688,7 @@ bot.on("message", async msg=>  {
 
         //func
         Embed = new discord.MessageEmbed()
-        .setColor(colors.yellow)
+        .setColor(colors.blue)
         .setAuthor("R6 Stats Help: ", bot.user.displayAvatarURL())
         .setThumbnail(bot.user.displayAvatarURL())
         
