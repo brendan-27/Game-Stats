@@ -20,6 +20,9 @@ let username = 'Le_Whatland';
 let platform = 'uplay';
 
 
+var invite = "https://discord.com/oauth2/authorize?client_id=724169400181063732&permissions=0&scope=bot";
+
+
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -105,6 +108,24 @@ bot.on("message", async msg=>  {
 
         msg.channel.send({embed: Embed});
     }
+
+    if(cmd == `g!invite`) {
+
+        Embed = new discord.MessageEmbed()
+        
+        .setAuthor("Invite Game Stats Bot to your server!", bot.user.displayAvatarURL())
+        .setColor(colors.blue)
+        .addField("Use this link to invite Game Bot:", invite)
+
+        .setFooter("Game Stats Bot | g!help | " + msg.createdAt)
+
+
+        msg.author.send(Embed);
+
+
+
+
+    }
  
     //fortnite command section.
 
@@ -113,6 +134,21 @@ bot.on("message", async msg=>  {
         Embed = new discord.MessageEmbed()
 
         //add help command after main command is finished with.
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.blue)
+        .setAuthor("Fortnite Stats Help: ", bot.user.displayAvatarURL())
+        .setThumbnail(bot.user.displayAvatarURL())
+        
+        .setTitle("How to use the Fortnite Section")
+        .addField("Use: ", "f!xlb, pc, psn {PlayerName}")
+        .addField("Example: ", "f!pc Ninja")
+        .addField("API: ", "The API callback can take anywhere from 0 seconds to 5 seconds.")
+        .addField("Errors: ", "Bot auto tells name errors, if any errors do g!help to report.")
+        
+
+
+        .setFooter("Fortnite Stats | f!help | " + msg.createdAt)
+        msg.channel.send({embed: Embed});
 
 
         // 3 modules/
