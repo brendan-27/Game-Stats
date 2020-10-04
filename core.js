@@ -102,10 +102,22 @@ bot.on("message", async msg=>  {
 
         Embed = new discord.MessageEmbed()
 
+        .setColor(colors.blue)
+        .setAuthor("Game Stats Bot Help", bot.user.displayAvatarURL)
+        .setThumbnail(bot.user.displayAvatarURL())
 
-        //add all of the modules and sub help commands.
+        .addField("**GENERAL commands for Game Stats:** ", "Help, API, Stats, Ping, Usesage.", true)
+        .addField("**g!ping: **", "Shows the ping (latency) of the bot. **Example:** 1000 seconds = 1 second response time." )
+        .addField("**g!stats: **", "Shows the stats of the bot.")
+        .addField("**g!invite: **", "Get the invite link to the bot, so you can add the bot to your own server.")
+        .addField("**FORTNITE: **", "f!help to see all commands.", true)
+        .addField("**APEX LEGENDS: **", "a!help to see all commands.", true)
+        .addField("**CSGO: **", "c!help to see all commands.", true)
+        .addField("**RAINBOW SIX SIEGE: **", "r6!help to see all commands.", true)
+        .addField("**OVERWATCH: **", "o!help to see all commands.", true)
 
 
+        .setFooter("Game Stats | g!help | " + msg.createdAt)
         msg.channel.send({embed: Embed});
     }
 
