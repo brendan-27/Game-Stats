@@ -37,7 +37,7 @@ bot.on("ready", async () => {
 })
 
 
-let statuses = [`Rainbow Six Siege`, "g!help", "Games", `Overwatch`]
+let statuses = [`Rainbow Six Siege`, "g!help", "Games", `Overwatch`, `CSGO`, 'Apex Legends']
 
 setInterval(function() {
 
@@ -520,7 +520,7 @@ bot.on("message", async msg=>  {
         const datac = await response.json();
 
 
-        //console.log(datac);
+        //console.log(datac.data.segments[0].stats.score.displayValue);
 
 
 
