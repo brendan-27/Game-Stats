@@ -115,6 +115,7 @@ bot.on("message", async msg=>  {
         .addField("**CSGO: **", "c!help to see all commands.", true)
         .addField("**RAINBOW SIX SIEGE: **", "r6!help to see all commands.", true)
         .addField("**OVERWATCH: **", "o!help to see all commands.", true)
+        .addField("**HYPERSCAPE: **", "h!help to see all commands.", true)
 
 
         .setFooter("Game Stats | g!help | " + msg.createdAt)
@@ -841,8 +842,150 @@ bot.on("message", async msg=>  {
 
     }
 
+    if (cmd == `h!help`) {
 
-    if (cmd == `h!stats`) {
+
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.yellowgreen)
+        .setAuthor("HyperScape Stats Help: ", bot.user.displayAvatarURL())
+        .setThumbnail(bot.user.displayAvatarURL())
+        
+        .setTitle("How to use the HyperScape Section")
+        .addField("Use: ", "h!psn {PlayerName}")
+        .addField("Use: ", "h!xbl {playerName}")
+        .addField("Use: ", "h!pc {playerName}")
+        .addField("Example: ", "h!stats [name]")
+        .addField("API: ", "The API callback can take anywhere from 0 seconds to 5 seconds.")
+        .addField("Errors: ", "If there is no API response after 5 seconds, the account is not found or is private, so please re-try with different spelling or ask them to public their acct.")
+        
+
+
+        .setFooter("HyperScape Stats | h!help | " + msg.createdAt)
+        msg.channel.send({embed: Embed});
+
+
+
+
+
+
+    }
+
+
+    if (cmd == `h!psn`) {
+        var newStr = "";
+
+        var arg2 = msg.content.slice(prefix.length).split(' ');
+        
+        var argRep = arg2[1].toLowerCase()
+
+        newStr = arg2[1];
+
+        const response = await fetch("https://public-api.tracker.gg/v2/hyper-scape/standard/profile/psn/" + newStr, {
+
+            headers : {
+                'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
+            }
+
+        });
+        const datac = await response.json();
+
+
+        //console.log(datac.data.segments[0]);
+
+
+
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.yellowgreen)
+        .setAuthor(datac.data.platformInfo.platformUserHandle + " Player HYPERSCAPE Stats: ", bot.user.displayAvatarURL()) 
+        .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
+
+
+        .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
+        .addField("Total Blows: ", datac.data.segments[0].stats.finalBlows.displayValue)
+        .addField("Total Chests Broken: ", datac.data.segments[0].stats.chestsBroken.displayValue)
+        .addField("Total Assists: ", datac.data.segments[0].stats.assists.displayValue)
+        .addField("Total Damage Done: ", datac.data.segments[0].stats.damageDone.displayValue)
+        .addField("Total Revivies: ", datac.data.segments[0].stats.revives.displayValue)
+        .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
+        .addField("Crowns: ", datac.data.segments[0].stats.crownPickups.displayValue)
+        .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
+        .addField("KD: ", datac.data.segments[0].stats.kdRatio.displayValue)
+        .addField("Kills Per Game: ", datac.data.segments[0].stats.killsPerGame.displayValue)
+        .addField("Win Percentage: ", datac.data.segments[0].stats.winPercentage.displayValue)
+
+
+   
+
+        
+        
+
+        //add more
+
+        .setFooter("HyperScape Stats | h!help | " + msg.createdAt)
+        msg.channel.send({embed: Embed});
+
+
+
+
+    }
+    if (cmd == `h!xbl`) {
+        var newStr = "";
+
+        var arg2 = msg.content.slice(prefix.length).split(' ');
+        
+        var argRep = arg2[1].toLowerCase()
+
+        newStr = arg2[1];
+
+        const response = await fetch("https://public-api.tracker.gg/v2/hyper-scape/standard/profile/xbl/" + newStr, {
+
+            headers : {
+                'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
+            }
+
+        });
+        const datac = await response.json();
+
+
+        //console.log(datac.data.segments[0]);
+
+
+
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.yellowgreen)
+        .setAuthor(datac.data.platformInfo.platformUserHandle + " Player HYPERSCAPE Stats: ", bot.user.displayAvatarURL()) 
+        .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
+
+
+        .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
+        .addField("Total Blows: ", datac.data.segments[0].stats.finalBlows.displayValue)
+        .addField("Total Chests Broken: ", datac.data.segments[0].stats.chestsBroken.displayValue)
+        .addField("Total Assists: ", datac.data.segments[0].stats.assists.displayValue)
+        .addField("Total Damage Done: ", datac.data.segments[0].stats.damageDone.displayValue)
+        .addField("Total Revivies: ", datac.data.segments[0].stats.revives.displayValue)
+        .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
+        .addField("Crowns: ", datac.data.segments[0].stats.crownPickups.displayValue)
+        .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
+        .addField("KD: ", datac.data.segments[0].stats.kdRatio.displayValue)
+        .addField("Kills Per Game: ", datac.data.segments[0].stats.killsPerGame.displayValue)
+        .addField("Win Percentage: ", datac.data.segments[0].stats.winPercentage.displayValue)
+
+
+   
+
+        
+        
+
+        //add more
+
+        .setFooter("HyperScape Stats | h!help | " + msg.createdAt)
+        msg.channel.send({embed: Embed});
+
+
+
+
+    }
+    if (cmd == `h!pc`) {
         var newStr = "";
 
         var arg2 = msg.content.slice(prefix.length).split(' ');
@@ -861,7 +1004,7 @@ bot.on("message", async msg=>  {
         const datac = await response.json();
 
 
-        console.log(datac.data.segments[0]);
+        //console.log(datac.data.segments[0]);
 
 
 
@@ -879,7 +1022,12 @@ bot.on("message", async msg=>  {
         .addField("Total Revivies: ", datac.data.segments[0].stats.revives.displayValue)
         .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
         .addField("Crowns: ", datac.data.segments[0].stats.crownPickups.displayValue)
-        
+        .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
+        .addField("KD: ", datac.data.segments[0].stats.kdRatio.displayValue)
+        .addField("Kills Per Game: ", datac.data.segments[0].stats.killsPerGame.displayValue)
+        .addField("Win Percentage: ", datac.data.segments[0].stats.winPercentage.displayValue)
+
+
    
 
         
