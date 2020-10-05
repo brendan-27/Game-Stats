@@ -574,7 +574,7 @@ bot.on("message", async msg=>  {
 
         Embed = new discord.MessageEmbed()
         .setColor(colors.cyan)
-        .setAuthor(datac.data.platformInfo.platformUserHandle + " Player CSGO Legends Stats: ", bot.user.displayAvatarURL()) 
+        .setAuthor(datac.data.platformInfo.platformUserHandle + " Player CSGO Stats: ", bot.user.displayAvatarURL()) 
         .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
 
 
@@ -836,6 +836,60 @@ bot.on("message", async msg=>  {
 
         .setFooter("R6 Seige Stats | r6!help | " + msg.createdAt)
         msg.channel.send({embed: Embed});
+
+
+
+    }
+
+
+    if (cmd == `h!stats`) {
+        var newStr = "";
+
+        var arg2 = msg.content.slice(prefix.length).split(' ');
+        
+        var argRep = arg2[1].toLowerCase()
+
+        newStr = arg2[1];
+
+        const response = await fetch("https://public-api.tracker.gg/v2/hyper-scape/standard/profile/uplay/" + newStr, {
+
+            headers : {
+                'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
+            }
+
+        });
+        const datac = await response.json();
+
+
+        console.log(datac.data.segments[0]);
+
+
+
+        Embed = new discord.MessageEmbed()
+        .setColor(colors.yellowgreen)
+        .setAuthor(datac.data.platformInfo.platformUserHandle + " Player HYPERSCAPE Stats: ", bot.user.displayAvatarURL()) 
+        .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
+
+
+        .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
+        .addField("Total Blows: ", datac.data.segments[0].stats.finalBlows.displayValue)
+        .addField("Total Chests Broken: ", datac.data.segments[0].stats.chestsBroken.displayValue)
+        .addField("Total Assists: ", datac.data.segments[0].stats.assists.displayValue)
+        .addField("Total Damage Done: ", datac.data.segments[0].stats.damageDone.displayValue)
+        .addField("Total Revivies: ", datac.data.segments[0].stats.revives.displayValue)
+        .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
+        .addField("Crowns: ", datac.data.segments[0].stats.crownPickups.displayValue)
+        
+   
+
+        
+        
+
+        //add more
+
+        .setFooter("HyperScape Stats | h!help | " + msg.createdAt)
+        msg.channel.send({embed: Embed});
+
 
 
 
