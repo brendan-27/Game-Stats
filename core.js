@@ -27,10 +27,7 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
 
-        
-
-
-
+    
 
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is online!`)
@@ -602,7 +599,7 @@ bot.on("message", async msg=>  {
 
         //add more
 
-        .setFooter("Apex Legends Stats | a!help | " + msg.createdAt)
+        .setFooter("CSGO Stats | c!help | " + msg.createdAt)
         msg.channel.send({embed: Embed});
 
 
