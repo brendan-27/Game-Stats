@@ -14,10 +14,6 @@ const ow = require('overwatch-stats-api');
 
 
 
-
-
-
-
 const R6API = require('r6api.js');
 const r6api = new R6API('cifotix134@vmgmails.com', 'coolkid988');
 
@@ -116,6 +112,7 @@ bot.on("message", async msg=>  {
         .addField("**g!ping: **", "Shows the ping (latency) of the bot. **Example:** 1000 seconds = 1 second response time." )
         .addField("**g!stats: **", "Shows the stats of the bot.")
         .addField("**g!invite: **", "Get the invite link to the bot, so you can add the bot to your own server.")
+        .addField("**g!changelog: **", "Provides a list of updates to the bot from the most recent patch.")
         .addField("**FORTNITE: **", "f!help to see all commands.", true)
         .addField("**APEX LEGENDS: **", "a!help to see all commands.", true)
         .addField("**CSGO: **", "c!help to see all commands.", true)
@@ -144,6 +141,25 @@ bot.on("message", async msg=>  {
 
 
 
+    }
+
+    if(cmd == `g!changelog`) {
+
+        Embed = new discord.MessageEmbed()
+        
+        .setAuthor("Changelog (Update 0.6.7):", bot.user.displayAvatarURL())
+        .setColor(colors.blue)
+        .addField("Added: ", "All games g!help to see.")
+        .addField("Fixed: ", "Fixed fortnite command not working.")
+        .addField("Fixes: ", "Bugs.")
+
+
+
+        .setFooter("Game Stats Bot | g!help | " + msg.createdAt)
+        msg.channel.send(Embed);
+
+
+        
     }
  
     //fortnite command section.
@@ -195,6 +211,8 @@ bot.on("message", async msg=>  {
         });
         const data = await response.json();
         //top 3
+
+        
         var three = data.lifeTimeStats;
          //error protection
          if (three == undefined) {
@@ -229,12 +247,17 @@ bot.on("message", async msg=>  {
         kills = Object.values(kills);
         //wins 
         var wins = data.lifeTimeStats;
-        wins = wins[9];
+        wins = wins[8];
         wins = Object.values(wins);
         //k/d
         var kd = data.lifeTimeStats;
         kd = kd[11];
         kd = Object.values(kd);      
+
+
+        var windper = data.lifeTimeStats;
+        windper = windper[9];
+        windper = Object.values(windper);
     
         //start embed
 
@@ -248,6 +271,7 @@ bot.on("message", async msg=>  {
         .addField("Total Matches:", matches[1])
         .addField("Total Kills", kills[1])
         .addField("Total Wins:", wins[1])
+        .addField("Win %: ", windper[1])
         .addField("K/D:", kd[1])
 
 
@@ -301,7 +325,6 @@ bot.on("message", async msg=>  {
         
         three = three[1];
         three = Object.values(three);
-        
         //top 10
         var ten = data.lifeTimeStats;
         ten = ten[3];
@@ -316,12 +339,17 @@ bot.on("message", async msg=>  {
         kills = Object.values(kills);
         //wins 
         var wins = data.lifeTimeStats;
-        wins = wins[9];
+        wins = wins[8];
         wins = Object.values(wins);
         //k/d
         var kd = data.lifeTimeStats;
         kd = kd[11];
         kd = Object.values(kd);      
+
+
+        var windper = data.lifeTimeStats;
+        windper = windper[9];
+        windper = Object.values(windper);
     
         //start embed
 
@@ -335,6 +363,7 @@ bot.on("message", async msg=>  {
         .addField("Total Matches:", matches[1])
         .addField("Total Kills", kills[1])
         .addField("Total Wins:", wins[1])
+        .addField("Win %: ", windper[1])
         .addField("K/D:", kd[1])
 
 
@@ -389,11 +418,7 @@ bot.on("message", async msg=>  {
 
         
         three = three[1];
-        
-        
-
         three = Object.values(three);
-        
         //top 10
         var ten = data.lifeTimeStats;
         ten = ten[3];
@@ -414,6 +439,11 @@ bot.on("message", async msg=>  {
         var kd = data.lifeTimeStats;
         kd = kd[11];
         kd = Object.values(kd);      
+
+
+        var windper = data.lifeTimeStats;
+        windper = windper[9];
+        windper = Object.values(windper);
     
         //start embed
 
@@ -427,6 +457,7 @@ bot.on("message", async msg=>  {
         .addField("Total Matches:", matches[1])
         .addField("Total Kills", kills[1])
         .addField("Total Wins:", wins[1])
+        .addField("Win %: ", windper[1])
         .addField("K/D:", kd[1])
 
 
