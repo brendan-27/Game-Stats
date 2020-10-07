@@ -13,6 +13,11 @@ const fetch = require('node-fetch');
 const ow = require('overwatch-stats-api');
 
 
+
+
+
+
+
 const R6API = require('r6api.js');
 const r6api = new R6API('cifotix134@vmgmails.com', 'coolkid988');
 
@@ -21,6 +26,10 @@ let platform = 'uplay';
 
 
 var invite = "https://discord.com/oauth2/authorize?client_id=724169400181063732&permissions=0&scope=bot";
+
+
+
+
 
 
 function numberWithCommas(x) {

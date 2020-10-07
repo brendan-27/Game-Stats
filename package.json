@@ -9,6 +9,7 @@
   "author": "whatland",
   "license": "ISC",
   "dependencies": {
+    "dblapi.js": "^2.4.1",
     "discord.js": "^12.2.0",
     "express": "^4.17.1",
     "overwatch-stats-api": "^2.1.0",
