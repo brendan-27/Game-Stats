@@ -829,6 +829,29 @@ bot.on("message", async msg=>  {
         newStrName1 = arg3[1];
 
         const data2 = await r6api.getId('uplay', newStrName1);
+
+        if (userId == undefined) {
+
+            Embed = new discord.MessageEmbed()
+            .setColor(colors.blue)
+            .setAuthor("Error", bot.user.displayAvatarURL())
+
+            .setThumbnail(bot.user.displayAvatarURL())
+            .setDescription("That is not a valid username!")
+           
+
+
+
+            .setFooter("R6 Siege | r6!help | " + msg.createdAt)
+
+
+
+
+            msg.channel.send({embed: Embed});
+            return
+
+
+        }
         
         var idplayer = data2[0].userId;
 
@@ -846,14 +869,34 @@ bot.on("message", async msg=>  {
 
         newStrName = arg2[1];*/
 
+        if (userId == undefined) {
+
+            Embed = new discord.MessageEmbed()
+            .setColor(colors.blue)
+            .setAuthor("Error", bot.user.displayAvatarURL())
+
+            .setThumbnail(bot.user.displayAvatarURL())
+            .setDescription("That is not a valid username!")
+           
+
+
+
+            .setFooter("R6 Siege | r6!help | " + msg.createdAt)
+
+
+
+
+            msg.channel.send({embed: Embed});
+            return
+
+
+        }
+
 
         
         const data = await r6api.getStats('uplay', idplayer);
 
-        //console.log(name);
-
-        //console.log(data[0].pvp.general);
-        //console.log(name)
+        console.log(data);
 
         Embed = new discord.MessageEmbed()
         .setColor(colors.blue)
@@ -879,6 +922,7 @@ bot.on("message", async msg=>  {
 
     }
 
+    
     if (cmd == `h!help`) {
 
 
