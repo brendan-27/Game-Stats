@@ -12,6 +12,12 @@ const colors = require("./colors.json");
 const fetch = require('node-fetch');
 const ow = require('overwatch-stats-api');
 
+const API = require('call-of-duty-api')();
+
+
+const API = require('call-of-duty-api')();
+
+
 
 
 const R6API = require('r6api.js');
@@ -1122,6 +1128,14 @@ bot.on("message", async msg=>  {
 
 
 
+    }
+
+
+    if(cmd == `mw!stats`) {
+
+
+
+      
     }
     
 
