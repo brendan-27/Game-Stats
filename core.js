@@ -15,13 +15,6 @@ const API = require('call-of-duty-api')();
 
 
 
-// warzone stats
-const Wrapzone = require("wrapzone").default;
-const platform = "battle" // psn | xbl | battle
-const userName = "<userName>" // Username (include id for battle.net like name#12345)
-await Wrapzone.authenticate('<ActivisionEmail>', '<ActivisionPassword>')
-const player = await Wrapzone.get(platform, userName);
-
 
 
 
@@ -1139,21 +1132,7 @@ bot.on("message", async msg=>  {
         if (cmd == `mw!stats`) {
 
 
-            var newStr = "";
-
-            var arg2 = msg.content.slice(prefix.length).split(' ');
-
-            var argRep = arg2[1].toLowerCase()
-
-            newStr = arg2[1];
-
-            const Wrapzone = require("wrapzone").default;
-            const platform = "battle"; // psn | xbl | battle
-            const userName = newStr; // Username (include id for battle.net like name#12345)
-            await Wrapzone.authenticate('brendan.gainer@gmail.com', 'Fender19')
-            const player = await Wrapzone.get(platform, userName);
-
-            console.log(player);
+          
 
 
 
@@ -1168,7 +1147,6 @@ bot.on("message", async msg=>  {
 
 
 
-    mwStats();
     
 
 
