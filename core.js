@@ -1126,25 +1126,8 @@ bot.on("message", async msg=>  {
     }
 
 
-    function mwStats() {
 
-
-        if (cmd == `mw!stats`) {
-
-
-          
-
-
-
-
-
-        }
-
-
-
-    }
-
-
+    //end of bot all main games activated.
 
 
     
