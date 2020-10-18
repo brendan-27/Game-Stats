@@ -592,60 +592,93 @@ bot.on("message", async msg=>  {
 
 
     if (cmd == `c!stats`) {
-        var newStr = "";
 
-        var arg2 = msg.content.slice(prefix.length).split(' ');
-        
-        var argRep = arg2[1].toLowerCase()
+        try {
 
-        newStr = arg2[1];
+            var newStr = "";
 
-        const response = await fetch("https://public-api.tracker.gg/v2/csgo/standard/profile/steam/" + newStr, {
+            var arg2 = msg.content.slice(prefix.length).split(' ');
 
-            headers : {
-                'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
-            }
+            var argRep = arg2[1].toLowerCase()
 
-        });
-        const datac = await response.json();
+            newStr = arg2[1];
 
+            const response = await fetch("https://public-api.tracker.gg/v2/csgo/standard/profile/steam/" + newStr, {
 
-        //console.log(datac.data.segments[0].stats.score.displayValue);
+                headers: {
+                    'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
+                }
 
-
-
-        Embed = new discord.MessageEmbed()
-        .setColor(colors.cyan)
-        .setAuthor(datac.data.platformInfo.platformUserHandle + " Player CSGO Stats: ", bot.user.displayAvatarURL()) 
-        .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
+            });
+            const datac = await response.json();
 
 
-        .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
-        .addField("Total Kills: ", datac.data.segments[0].stats.kills.displayValue)
-        .addField("Total Deaths: ", datac.data.segments[0].stats.deaths.displayValue)
-        .addField("KD: ", datac.data.segments[0].stats.kd.displayValue)
-        .addField("Total Damage: ", datac.data.segments[0].stats.damage.displayValue)
-        .addField("Total Headshots: ", datac.data.segments[0].stats.headshots.displayValue)
-        .addField("Total Shots Fired: ", datac.data.segments[0].stats.shotsFired.displayValue)
-        .addField("Total Shots Hit: ", datac.data.segments[0].stats.shotsHit.displayValue)
-        .addField("Shot Accuracy: ", datac.data.segments[0].stats.shotsAccuracy.displayValue)
-        .addField("Bombs Planted: ", datac.data.segments[0].stats.bombsPlanted.displayValue)
-        .addField("Bombs Defused: ", datac.data.segments[0].stats.bombsDefused.displayValue)
-        .addField("Money Earned: ", datac.data.segments[0].stats.moneyEarned.displayValue)
-        .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
-        .addField("Loses: ", datac.data.segments[0].stats.losses.displayValue)
-        .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
-        .addField("Win Loss %: ", datac.data.segments[0].stats.wlPercentage.displayValue)
-        .addField("HS %: ", datac.data.segments[0].stats.headshotPct.displayValue)
+            //console.log(datac.data.segments[0].stats.score.displayValue);
 
-        
-        
 
-        //add more
 
-        .setFooter("CSGO Stats | c!help | " + msg.createdAt)
-        msg.channel.send({embed: Embed});
+            Embed = new discord.MessageEmbed()
+                .setColor(colors.cyan)
+                .setAuthor(datac.data.platformInfo.platformUserHandle + " Player CSGO Stats: ", bot.user.displayAvatarURL())
+                .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
 
+
+                .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
+                .addField("Total Kills: ", datac.data.segments[0].stats.kills.displayValue)
+                .addField("Total Deaths: ", datac.data.segments[0].stats.deaths.displayValue)
+                .addField("KD: ", datac.data.segments[0].stats.kd.displayValue)
+                .addField("Total Damage: ", datac.data.segments[0].stats.damage.displayValue)
+                .addField("Total Headshots: ", datac.data.segments[0].stats.headshots.displayValue)
+                .addField("Total Shots Fired: ", datac.data.segments[0].stats.shotsFired.displayValue)
+                .addField("Total Shots Hit: ", datac.data.segments[0].stats.shotsHit.displayValue)
+                .addField("Shot Accuracy: ", datac.data.segments[0].stats.shotsAccuracy.displayValue)
+                .addField("Bombs Planted: ", datac.data.segments[0].stats.bombsPlanted.displayValue)
+                .addField("Bombs Defused: ", datac.data.segments[0].stats.bombsDefused.displayValue)
+                .addField("Money Earned: ", datac.data.segments[0].stats.moneyEarned.displayValue)
+                .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
+                .addField("Loses: ", datac.data.segments[0].stats.losses.displayValue)
+                .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
+                .addField("Win Loss %: ", datac.data.segments[0].stats.wlPercentage.displayValue)
+                .addField("HS %: ", datac.data.segments[0].stats.headshotPct.displayValue)
+
+
+
+
+                //add more
+
+                .setFooter("CSGO Stats | c!help | " + msg.createdAt)
+            msg.channel.send({ embed: Embed });
+
+
+        } catch {
+
+
+            Embed = new discord.MessageEmbed()
+                .setColor(colors.blue)
+                .setAuthor("Error", bot.user.displayAvatarURL())
+
+                .setThumbnail(bot.user.displayAvatarURL())
+                .setDescription("That is not a valid username, or their account is private.")
+
+
+
+                .setTimestamp()
+                .setFooter("Overwatch Stats  | o!help | ")
+
+
+
+
+                msg.channel.send({ embed: Embed });
+                return
+
+
+
+
+
+
+
+        }
+            
 
 
 
@@ -692,75 +725,104 @@ bot.on("message", async msg=>  {
 
 
     if (cmd == `o!stats`) {
-        //working OW stats, need to parse and get a system for naming.
-
-        var newStrName = "";
-
-        var arg2 = msg.content.slice(prefix.length).split(' ');
-        
-        var argRep = arg2[1].toLowerCase()
-
-        newStrName = arg2[1];
-
-        const stats = await ow.getAllStats(newStrName, 'pc');
 
 
-        //REVIST THIS NEED A FUTURE FIX
+        try {
+            //working OW stats, need to parse and get a system for naming.
 
-        /*if(undefined == 'substring') {
+            var newStrName = "";
+
+            var arg2 = msg.content.slice(prefix.length).split(' ');
+
+            var argRep = arg2[1].toLowerCase()
+
+            newStrName = arg2[1];
+
+            const stats = await ow.getAllStats(newStrName, 'pc');
+
+
+            //REVIST THIS NEED A FUTURE FIX
+
+            /*if(undefined == 'substring') {
+                Embed = new discord.MessageEmbed()
+                .setColor(colors.yellow)
+                .setAuthor("Error: ", bot.user.displayAvatarURL())
+
+                .setDescription("Profile is not found, use o!help to see commands.")
+
+                .setFooter("Overwatch Stats | o!help")
+                msg.channel.send({embed: Embed});
+            }*/
+
+
+            var profPic = stats.iconURL;
+
+            var compHeroes = stats.heroStats.competitive;
+
+
+            //console.log(compHeroes);
+
+
+
             Embed = new discord.MessageEmbed()
-            .setColor(colors.yellow)
-            .setAuthor("Error: ", bot.user.displayAvatarURL())
-
-            .setDescription("Profile is not found, use o!help to see commands.")
-
-            .setFooter("Overwatch Stats | o!help")
-            msg.channel.send({embed: Embed});
-        }*/
+                .setColor(colors.yellow)
+                .setAuthor(newStrName + " Overwatch Stats: ", bot.user.displayAvatarURL())
+                .setThumbnail(profPic) // need to set  so i have a custom background (overwatch) PLACE PLAYER ICON.
 
 
-        var profPic = stats.iconURL; 
-
-        var compHeroes = stats.heroStats.competitive;
-
-
-        //console.log(compHeroes);
-
-        
-
-        Embed = new discord.MessageEmbed()
-        .setColor(colors.yellow)
-        .setAuthor( newStrName + " Overwatch Stats: ", bot.user.displayAvatarURL())
-        .setThumbnail(profPic) // need to set  so i have a custom background (overwatch) PLACE PLAYER ICON.
+                .addField("Battle Tag: ", stats["battletag"])
+                .addField("Level: ", stats["level"])
+                .addField("Prestige: ", stats["prestige"])
+                .addField("Endorsments: ", "Shotcaller: " + stats.endorsements["shotcaller"] + ", Teammate: " + stats.endorsements["teammate"] + ", Sportsmanship: " + stats.endorsements["sportsmanship"])
 
 
-        .addField("Battle Tag: ", stats["battletag"])
-        .addField("Level: ", stats["level"])
-        .addField("Prestige: ", stats["prestige"])
-        .addField("Endorsments: ", "Shotcaller: " + stats.endorsements["shotcaller"] + ", Teammate: " + stats.endorsements["teammate"] + ", Sportsmanship: " + stats.endorsements["sportsmanship"])
+                .setImage("https://d15f34w2p8l1cc.cloudfront.net/overwatch/625645c3c9af49eb315b504dba32137bb4081d348ec5b9750196b0ec0c9bb6a6.png") //BORDER TO SEE WHAT LEVEL
 
 
-        .setImage("https://d15f34w2p8l1cc.cloudfront.net/overwatch/625645c3c9af49eb315b504dba32137bb4081d348ec5b9750196b0ec0c9bb6a6.png") //BORDER TO SEE WHAT LEVEL
+                //  (STARS).setImage("https://d15f34w2p8l1cc.cloudfront.net/overwatch/605c201cf3f0d24b318f643acb812084ff284e660f2bb5d62b487847d33fad29.png")
 
-
-        //  (STARS).setImage("https://d15f34w2p8l1cc.cloudfront.net/overwatch/605c201cf3f0d24b318f643acb812084ff284e660f2bb5d62b487847d33fad29.png")
-
-        .addField("Comp: Total Damage Done: ", compHeroes.overall.combat.all_damage_done)
-        .addField("Comp: Barrier Damage Done: ", compHeroes.overall.combat.barrier_damage_done)
-        .addField("Comp: Total Deaths: ", compHeroes.overall.combat.deaths)
-        .addField("Comp: Total Eliminations: ", compHeroes.overall.combat.eliminations)
-        .addField("Comp: Total Objective Time: ", compHeroes.overall.combat.objective_time)
-        .addField("Comp (Total): Loses", compHeroes.overall.game.games_lost)
-        .addField("Comp (Total): Played", compHeroes.overall.game.games_played)
-        .addField("Comp (Total): Wins", compHeroes.overall.game.games_won)
-        .addField("Comp (Total): ", compHeroes.overall.game.time_played)
+                .addField("Comp: Total Damage Done: ", compHeroes.overall.combat.all_damage_done)
+                .addField("Comp: Barrier Damage Done: ", compHeroes.overall.combat.barrier_damage_done)
+                .addField("Comp: Total Deaths: ", compHeroes.overall.combat.deaths)
+                .addField("Comp: Total Eliminations: ", compHeroes.overall.combat.eliminations)
+                .addField("Comp: Total Objective Time: ", compHeroes.overall.combat.objective_time)
+                .addField("Comp (Total): Loses", compHeroes.overall.game.games_lost)
+                .addField("Comp (Total): Played", compHeroes.overall.game.games_played)
+                .addField("Comp (Total): Wins", compHeroes.overall.game.games_won)
+                .addField("Comp (Total): ", compHeroes.overall.game.time_played)
 
 
 
 
 
-        .setFooter("Overwatch Stats | o!help | " + msg.createdAt)
-        msg.channel.send({embed: Embed});
+                .setFooter("Overwatch Stats | o!help | " + msg.createdAt)
+            msg.channel.send({ embed: Embed });
+
+        } catch {
+
+
+            Embed = new discord.MessageEmbed()
+                .setColor(colors.blue)
+                .setAuthor("Error", bot.user.displayAvatarURL())
+
+                .setThumbnail(bot.user.displayAvatarURL())
+                .setDescription("That is not a valid username, or their account is private.")
+
+
+
+                .setTimestamp()
+                .setFooter("Overwatch Stats  | o!help | ")
+
+
+
+
+            msg.channel.send({ embed: Embed });
+            return
+
+
+
+
+        }
 
 
 
