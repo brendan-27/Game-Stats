@@ -509,49 +509,77 @@ bot.on("message", async msg=>  {
 
 
     if (cmd == `a!stats`) {
-        var newStr = "";
 
-        var arg2 = msg.content.slice(prefix.length).split(' ');
-        
-        var argRep = arg2[1].toLowerCase()
+        try {
+            var newStr = "";
 
-        newStr = arg2[1];
+            var arg2 = msg.content.slice(prefix.length).split(' ');
 
-        const response = await fetch("https://public-api.tracker.gg/v2/apex/standard/profile/origin/" + newStr, {
+            var argRep = arg2[1].toLowerCase()
 
-            headers : {
-                'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
-            }
+            newStr = arg2[1];
 
-        });
-        const datac = await response.json();
-        //console.log(datac.data.platformInfo.platformUserId);
-        var profPic1 = datac.data.platformInfo.avatarUrl;
-        //console.log(datac.data.segments[0]);
+            const response = await fetch("https://public-api.tracker.gg/v2/apex/standard/profile/origin/" + newStr, {
 
-        Embed = new discord.MessageEmbed()
-        .setColor(colors.orange)
-        .setAuthor(datac.data.platformInfo.platformUserId + " Player Apex Legends Stats: ", bot.user.displayAvatarURL()) //fix name
-        .setThumbnail(profPic1)  // fix
+                headers: {
+                    'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
+                }
+
+            });
+            const datac = await response.json();
+            //console.log(datac.data.platformInfo.platformUserId);
+            var profPic1 = datac.data.platformInfo.avatarUrl;
+            //console.log(datac.data.segments[0]);
+
+            Embed = new discord.MessageEmbed()
+                .setColor(colors.orange)
+                .setAuthor(datac.data.platformInfo.platformUserId + " Player Apex Legends Stats: ", bot.user.displayAvatarURL()) //fix name
+                .setThumbnail(profPic1)  // fix
 
 
-        .addField("Level: ", datac.data.segments[0].stats.level.value)
-        .addField("Total Kills: ", datac.data.segments[0].stats.kills.value)
-        .addField("Total Kills With Match: ", datac.data.segments[0].stats.killsPerMatch.value)
-        .addField("Total Damage Per Match: ", datac.data.segments[0].stats.damagePerMatch.value)
-        .addField("Total Winning Kills: ", datac.data.segments[0].stats.winningKills.value)
-        .addField("Total Damage: ", datac.data.segments[0].stats.damage.value)
-        .addField("Headshots: ", datac.data.segments[0].stats.headshots.value)
-        .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.value)
-        .addField("Total Revives: ", datac.data.segments[0].stats.revives.value)
-        .addField("Total Top 3's: ", datac.data.segments[0].stats.timesPlacedtop3.value)
-        
+                .addField("Level: ", datac.data.segments[0].stats.level.value)
+                .addField("Total Kills: ", datac.data.segments[0].stats.kills.value)
+                .addField("Total Kills With Match: ", datac.data.segments[0].stats.killsPerMatch.value)
+                .addField("Total Damage Per Match: ", datac.data.segments[0].stats.damagePerMatch.value)
+                .addField("Total Winning Kills: ", datac.data.segments[0].stats.winningKills.value)
+                .addField("Total Damage: ", datac.data.segments[0].stats.damage.value)
+                .addField("Headshots: ", datac.data.segments[0].stats.headshots.value)
+                .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.value)
+                .addField("Total Revives: ", datac.data.segments[0].stats.revives.value)
+                .addField("Total Top 3's: ", datac.data.segments[0].stats.timesPlacedtop3.value)
 
-        //add more
 
-        .setFooter("Apex Legends Stats | a!help | " + msg.createdAt)
-        msg.channel.send({embed: Embed});
+                //add more
 
+                .setFooter("Apex Legends Stats | a!help | " + msg.createdAt)
+            msg.channel.send({ embed: Embed });
+
+        } catch {
+
+
+
+            Embed = new discord.MessageEmbed()
+                .setColor(colors.blue)
+                .setAuthor("Error", bot.user.displayAvatarURL())
+
+                .setThumbnail(bot.user.displayAvatarURL())
+                .setDescription("That is not a valid username, or their account is private.")
+
+
+
+                .setTimestamp()
+                .setFooter("Apex Legends Stats  | a!help | ")
+
+
+
+
+                msg.channel.send({ embed: Embed });
+                return
+
+
+
+
+        }
 
 
 
