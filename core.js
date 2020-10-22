@@ -874,7 +874,7 @@ bot.on("message", async msg=>  {
         
         .setTitle("How to use the Rainbow Six Siege Section")
         .addField("Use: ", "r6!stats {PlayerName}")
-        .addField("Example: ", "r6!stats Le_Whatlands")
+        .addField("Example: ", "r6!stats Le_Whatland")
         .addField("API: ", "The API callback can take anywhere from 0 seconds to 5 seconds.")
         .addField("Errors: ", "If there is no API response after 5 seconds, the account is either private or not found..")
         //.addField("Public Profiles: ", "To make your profile public go ingame to options -> social -> career profile visibility: PUBLIC")
@@ -911,107 +911,74 @@ bot.on("message", async msg=>  {
 
     if(cmd == 'r6!stats') {
 
-        
-        //example: console.log(`${username} has played ${stats.pvp.general.matches} matches.`);
+        try {
 
-        var newStrName1 = "";
 
-        var arg3 = msg.content.slice(prefix.length).split(' ');
-        
-        var argRep2 = arg3[1].toLowerCase()
 
-        newStrName1 = arg3[1];
+                //example: console.log(`${username} has played ${stats.pvp.general.matches} matches.`);
 
-        const data2 = await r6api.getId('uplay', newStrName1);
+            var newStrName1 = "";
 
-        if (userId == undefined) {
+            var arg3 = msg.content.slice(prefix.length).split(' ');
+            
+            var argRep2 = arg3[1].toLowerCase()
+
+            newStrName1 = arg3[1];
+
+            const data2 = await r6api.getId('uplay', newStrName1);
+            
+            
+            var idplayer = data2[0].userId;
+            
+            const data = await r6api.getStats('uplay', idplayer);
+
+            // debugconsole.log(data);
 
             Embed = new discord.MessageEmbed()
             .setColor(colors.blue)
-            .setAuthor("Error", bot.user.displayAvatarURL())
-
-            .setThumbnail(bot.user.displayAvatarURL())
-            .setDescription("That is not a valid username!")
-           
+            .setAuthor( idplayer + " Player ID Rainbow Six Siege Stats: ", bot.user.displayAvatarURL()) //fix name
+            .setThumbnail('https://cdn.discordapp.com/attachments/761009105053286430/761009632264716288/1660365744607238c5_720x720.png') 
 
 
+            .addField("Total Kills: ", data[0].pvp.general.kills)
+            .addField("Total Deaths: ", data[0].pvp.general.deaths)
+            .addField("Total Assists: ", data[0].pvp.general.assists)
+            .addField("Total Headshots: ", data[0].pvp.general.headshots)
+            .addField("Total Matches: ", data[0].pvp.general.matches)
+            .addField("Total Wins: ", data[0].pvp.general.wins)
+            .addField("Total Losses: ", data[0].pvp.general.losses)
 
-            .setFooter("R6 Siege | r6!help | " + msg.createdAt)
 
+            //add more
 
-
-
+            .setFooter("R6 Seige Stats | r6!help | " + msg.createdAt)
             msg.channel.send({embed: Embed});
-            return
+
+        } catch {
+
+            Embed = new discord.MessageEmbed()
+                .setColor(colors.blue)
+                .setAuthor("Error", bot.user.displayAvatarURL())
+
+                .setThumbnail(bot.user.displayAvatarURL())
+                .setDescription("That is not a valid username, or their account is private.")
+
+
+
+                .setTimestamp()
+                .setFooter("R6 Stats | r6!help | ")
+
+
+
+
+                msg.channel.send({ embed: Embed });
+                return
+
+
 
 
         }
         
-        var idplayer = data2[0].userId;
-
-
-        //msg.channel.send("This players id is " + data[0].userId);
-
-        //div
-
-
-        /*var newStrName = "";
-
-        var arg2 = msg.content.slice(prefix.length).split(' ');
-        
-        var argRep = arg2[1].toLowerCase()
-
-        newStrName = arg2[1];*/
-
-        if (userId == undefined) {
-
-            Embed = new discord.MessageEmbed()
-            .setColor(colors.blue)
-            .setAuthor("Error", bot.user.displayAvatarURL())
-
-            .setThumbnail(bot.user.displayAvatarURL())
-            .setDescription("That is not a valid username!")
-           
-
-
-
-            .setFooter("R6 Siege | r6!help | " + msg.createdAt)
-
-
-
-
-            msg.channel.send({embed: Embed});
-            return
-
-
-        }
-
-
-        
-        const data = await r6api.getStats('uplay', idplayer);
-
-        console.log(data);
-
-        Embed = new discord.MessageEmbed()
-        .setColor(colors.blue)
-        .setAuthor( idplayer + " Player ID Rainbow Six Siege Stats: ", bot.user.displayAvatarURL()) //fix name
-        .setThumbnail('https://cdn.discordapp.com/attachments/761009105053286430/761009632264716288/1660365744607238c5_720x720.png') 
-
-
-        .addField("Total Kills: ", data[0].pvp.general.kills)
-        .addField("Total Deaths: ", data[0].pvp.general.deaths)
-        .addField("Total Assists: ", data[0].pvp.general.assists)
-        .addField("Total Headshots: ", data[0].pvp.general.headshots)
-        .addField("Total Matches: ", data[0].pvp.general.matches)
-        .addField("Total Wins: ", data[0].pvp.general.wins)
-        .addField("Total Losses: ", data[0].pvp.general.losses)
-
-
-        //add more
-
-        .setFooter("R6 Seige Stats | r6!help | " + msg.createdAt)
-        msg.channel.send({embed: Embed});
-
 
 
     }
@@ -1047,171 +1014,259 @@ bot.on("message", async msg=>  {
 
 
     if (cmd == `h!psn`) {
-        var newStr = "";
-
-        var arg2 = msg.content.slice(prefix.length).split(' ');
-        
-        var argRep = arg2[1].toLowerCase()
-
-        newStr = arg2[1];
-
-        const response = await fetch("https://public-api.tracker.gg/v2/hyper-scape/standard/profile/psn/" + newStr, {
-
-            headers : {
-                'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
-            }
-
-        });
-        const datac = await response.json();
-
-
-        //console.log(datac.data.segments[0]);
+        try {
 
 
 
-        Embed = new discord.MessageEmbed()
-        .setColor(colors.yellowgreen)
-        .setAuthor(datac.data.platformInfo.platformUserHandle + " Player HYPERSCAPE Stats: ", bot.user.displayAvatarURL()) 
-        .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
+                    var newStr = "";
+
+                var arg2 = msg.content.slice(prefix.length).split(' ');
+                
+                var argRep = arg2[1].toLowerCase()
+
+                newStr = arg2[1];
+
+                const response = await fetch("https://public-api.tracker.gg/v2/hyper-scape/standard/profile/psn/" + newStr, {
+
+                    headers : {
+                        'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
+                    }
+
+                });
+                const datac = await response.json();
 
 
-        .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
-        .addField("Total Blows: ", datac.data.segments[0].stats.finalBlows.displayValue)
-        .addField("Total Chests Broken: ", datac.data.segments[0].stats.chestsBroken.displayValue)
-        .addField("Total Assists: ", datac.data.segments[0].stats.assists.displayValue)
-        .addField("Total Damage Done: ", datac.data.segments[0].stats.damageDone.displayValue)
-        .addField("Total Revivies: ", datac.data.segments[0].stats.revives.displayValue)
-        .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
-        .addField("Crowns: ", datac.data.segments[0].stats.crownPickups.displayValue)
-        .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
-        .addField("KD: ", datac.data.segments[0].stats.kdRatio.displayValue)
-        .addField("Kills Per Game: ", datac.data.segments[0].stats.killsPerGame.displayValue)
-        .addField("Win Percentage: ", datac.data.segments[0].stats.winPercentage.displayValue)
+                //console.log(datac.data.segments[0]);
 
 
-   
 
-        
-        
+                Embed = new discord.MessageEmbed()
+                .setColor(colors.yellowgreen)
+                .setAuthor(datac.data.platformInfo.platformUserHandle + " Player HYPERSCAPE Stats: ", bot.user.displayAvatarURL()) 
+                .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
 
-        //add more
 
-        .setFooter("HyperScape Stats | h!help | " + msg.createdAt)
-        msg.channel.send({embed: Embed});
+                .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
+                .addField("Total Blows: ", datac.data.segments[0].stats.finalBlows.displayValue)
+                .addField("Total Chests Broken: ", datac.data.segments[0].stats.chestsBroken.displayValue)
+                .addField("Total Assists: ", datac.data.segments[0].stats.assists.displayValue)
+                .addField("Total Damage Done: ", datac.data.segments[0].stats.damageDone.displayValue)
+                .addField("Total Revivies: ", datac.data.segments[0].stats.revives.displayValue)
+                .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
+                .addField("Crowns: ", datac.data.segments[0].stats.crownPickups.displayValue)
+                .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
+                .addField("KD: ", datac.data.segments[0].stats.kdRatio.displayValue)
+                .addField("Kills Per Game: ", datac.data.segments[0].stats.killsPerGame.displayValue)
+                .addField("Win Percentage: ", datac.data.segments[0].stats.winPercentage.displayValue)
+
+
+           
+
+                
+                
+
+                //add more
+
+                .setFooter("HyperScape Stats | h!help | " + msg.createdAt)
+                msg.channel.send({embed: Embed});
+        } catch {
+
+            Embed = new discord.MessageEmbed()
+                .setColor(colors.blue)
+                .setAuthor("Error", bot.user.displayAvatarURL())
+
+                .setThumbnail(bot.user.displayAvatarURL())
+                .setDescription("That is not a valid username, or their account is private.")
+
+
+
+                .setTimestamp()
+                .setFooter("HyperScape Stats   c!help | ")
+
+
+
+
+                msg.channel.send({ embed: Embed });
+                return
+
+
+        }
 
 
 
 
     }
     if (cmd == `h!xbl`) {
-        var newStr = "";
-
-        var arg2 = msg.content.slice(prefix.length).split(' ');
-        
-        var argRep = arg2[1].toLowerCase()
-
-        newStr = arg2[1];
-
-        const response = await fetch("https://public-api.tracker.gg/v2/hyper-scape/standard/profile/xbl/" + newStr, {
-
-            headers : {
-                'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
-            }
-
-        });
-        const datac = await response.json();
+        try {
 
 
-        //console.log(datac.data.segments[0]);
+                    var newStr = "";
+
+                var arg2 = msg.content.slice(prefix.length).split(' ');
+                
+                var argRep = arg2[1].toLowerCase()
+
+                newStr = arg2[1];
+
+                const response = await fetch("https://public-api.tracker.gg/v2/hyper-scape/standard/profile/xbl/" + newStr, {
+
+                    headers : {
+                        'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
+                    }
+
+                });
+                const datac = await response.json();
 
 
-
-        Embed = new discord.MessageEmbed()
-        .setColor(colors.yellowgreen)
-        .setAuthor(datac.data.platformInfo.platformUserHandle + " Player HYPERSCAPE Stats: ", bot.user.displayAvatarURL()) 
-        .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
-
-
-        .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
-        .addField("Total Blows: ", datac.data.segments[0].stats.finalBlows.displayValue)
-        .addField("Total Chests Broken: ", datac.data.segments[0].stats.chestsBroken.displayValue)
-        .addField("Total Assists: ", datac.data.segments[0].stats.assists.displayValue)
-        .addField("Total Damage Done: ", datac.data.segments[0].stats.damageDone.displayValue)
-        .addField("Total Revivies: ", datac.data.segments[0].stats.revives.displayValue)
-        .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
-        .addField("Crowns: ", datac.data.segments[0].stats.crownPickups.displayValue)
-        .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
-        .addField("KD: ", datac.data.segments[0].stats.kdRatio.displayValue)
-        .addField("Kills Per Game: ", datac.data.segments[0].stats.killsPerGame.displayValue)
-        .addField("Win Percentage: ", datac.data.segments[0].stats.winPercentage.displayValue)
-
-
-   
-
-        
-        
-
-        //add more
-
-        .setFooter("HyperScape Stats | h!help | " + msg.createdAt)
-        msg.channel.send({embed: Embed});
+                //console.log(datac.data.segments[0]);
 
 
 
+                Embed = new discord.MessageEmbed()
+                .setColor(colors.yellowgreen)
+                .setAuthor(datac.data.platformInfo.platformUserHandle + " Player HYPERSCAPE Stats: ", bot.user.displayAvatarURL()) 
+                .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
 
+
+                .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
+                .addField("Total Blows: ", datac.data.segments[0].stats.finalBlows.displayValue)
+                .addField("Total Chests Broken: ", datac.data.segments[0].stats.chestsBroken.displayValue)
+                .addField("Total Assists: ", datac.data.segments[0].stats.assists.displayValue)
+                .addField("Total Damage Done: ", datac.data.segments[0].stats.damageDone.displayValue)
+                .addField("Total Revivies: ", datac.data.segments[0].stats.revives.displayValue)
+                .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
+                .addField("Crowns: ", datac.data.segments[0].stats.crownPickups.displayValue)
+                .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
+                .addField("KD: ", datac.data.segments[0].stats.kdRatio.displayValue)
+                .addField("Kills Per Game: ", datac.data.segments[0].stats.killsPerGame.displayValue)
+                .addField("Win Percentage: ", datac.data.segments[0].stats.winPercentage.displayValue)
+
+
+           
+
+                
+                
+
+                //add more
+
+                .setFooter("HyperScape Stats | h!help | " + msg.createdAt)
+                msg.channel.send({embed: Embed});
+
+
+
+
+        } catch  {
+
+                Embed = new discord.MessageEmbed()
+                .setColor(colors.blue)
+                .setAuthor("Error", bot.user.displayAvatarURL())
+
+                .setThumbnail(bot.user.displayAvatarURL())
+                .setDescription("That is not a valid username, or their account is private.")
+
+
+
+                .setTimestamp()
+                .setFooter("HyperScape Stats   c!help | ")
+
+
+
+
+                msg.channel.send({ embed: Embed });
+                return
+
+
+
+
+
+
+        }
     }
     if (cmd == `h!pc`) {
-        var newStr = "";
+        try {
 
-        var arg2 = msg.content.slice(prefix.length).split(' ');
+                var newStr = "";
+
+            var arg2 = msg.content.slice(prefix.length).split(' ');
+            
+            var argRep = arg2[1].toLowerCase()
+
+            newStr = arg2[1];
+
+            const response = await fetch("https://public-api.tracker.gg/v2/hyper-scape/standard/profile/uplay/" + newStr, {
+
+                headers : {
+                    'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
+                }
+
+            });
+            const datac = await response.json();
+
+
+            //console.log(datac.data.segments[0]);
+
+
+
+            Embed = new discord.MessageEmbed()
+            .setColor(colors.yellowgreen)
+            .setAuthor(datac.data.platformInfo.platformUserHandle + " Player HYPERSCAPE Stats: ", bot.user.displayAvatarURL()) 
+            .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
+
+
+            .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
+            .addField("Total Blows: ", datac.data.segments[0].stats.finalBlows.displayValue)
+            .addField("Total Chests Broken: ", datac.data.segments[0].stats.chestsBroken.displayValue)
+            .addField("Total Assists: ", datac.data.segments[0].stats.assists.displayValue)
+            .addField("Total Damage Done: ", datac.data.segments[0].stats.damageDone.displayValue)
+            .addField("Total Revivies: ", datac.data.segments[0].stats.revives.displayValue)
+            .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
+            .addField("Crowns: ", datac.data.segments[0].stats.crownPickups.displayValue)
+            .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
+            .addField("KD: ", datac.data.segments[0].stats.kdRatio.displayValue)
+            .addField("Kills Per Game: ", datac.data.segments[0].stats.killsPerGame.displayValue)
+            .addField("Win Percentage: ", datac.data.segments[0].stats.winPercentage.displayValue)
+
+
+       
+
+            
         
-        var argRep = arg2[1].toLowerCase()
 
-        newStr = arg2[1];
+            //add more
 
-        const response = await fetch("https://public-api.tracker.gg/v2/hyper-scape/standard/profile/uplay/" + newStr, {
-
-            headers : {
-                'TRN-Api-Key': '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
-            }
-
-        });
-        const datac = await response.json();
-
-
-        //console.log(datac.data.segments[0]);
+            .setFooter("HyperScape Stats | h!help | " + msg.createdAt)
+            msg.channel.send({embed: Embed});
 
 
 
-        Embed = new discord.MessageEmbed()
-        .setColor(colors.yellowgreen)
-        .setAuthor(datac.data.platformInfo.platformUserHandle + " Player HYPERSCAPE Stats: ", bot.user.displayAvatarURL()) 
-        .setThumbnail(datac.data.platformInfo.avatarUrl)  // fix
 
 
-        .addField("Total Playtime: ", datac.data.segments[0].stats.timePlayed.displayValue)
-        .addField("Total Blows: ", datac.data.segments[0].stats.finalBlows.displayValue)
-        .addField("Total Chests Broken: ", datac.data.segments[0].stats.chestsBroken.displayValue)
-        .addField("Total Assists: ", datac.data.segments[0].stats.assists.displayValue)
-        .addField("Total Damage Done: ", datac.data.segments[0].stats.damageDone.displayValue)
-        .addField("Total Revivies: ", datac.data.segments[0].stats.revives.displayValue)
-        .addField("Total Matches Played: ", datac.data.segments[0].stats.matchesPlayed.displayValue)
-        .addField("Crowns: ", datac.data.segments[0].stats.crownPickups.displayValue)
-        .addField("Wins: ", datac.data.segments[0].stats.wins.displayValue)
-        .addField("KD: ", datac.data.segments[0].stats.kdRatio.displayValue)
-        .addField("Kills Per Game: ", datac.data.segments[0].stats.killsPerGame.displayValue)
-        .addField("Win Percentage: ", datac.data.segments[0].stats.winPercentage.displayValue)
+
+        } catch {
+            Embed = new discord.MessageEmbed()
+                .setColor(colors.blue)
+                .setAuthor("Error", bot.user.displayAvatarURL())
+
+                .setThumbnail(bot.user.displayAvatarURL())
+                .setDescription("That is not a valid username, or their account is private.")
 
 
-   
 
-        
-    
+                .setTimestamp()
+                .setFooter("HyperScape Stats   c!help | ")
 
-        //add more
 
-        .setFooter("HyperScape Stats | h!help | " + msg.createdAt)
-        msg.channel.send({embed: Embed});
+
+
+                msg.channel.send({ embed: Embed });
+                return
+
+
+
+
+
+
+        }
 
     }
 
