@@ -1,7 +1,7 @@
 //started update on 9/17. games include OW and FN and Siege.
 
 
-
+//ready to launch.
 
 //main central commands: api, help, sub helps for all games. 
 
