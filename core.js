@@ -1269,4 +1269,4 @@ bot.on("message", async msg=>  {
 
 
 
-bot.login(process.env.token);
+bot.login(process.env.Token);
