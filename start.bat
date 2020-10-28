@@ -1,2 +1,0 @@
-node core.js
-PAUSE

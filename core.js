@@ -14,10 +14,6 @@ const ow = require('overwatch-stats-api');
 const API = require('call-of-duty-api')();
 
 
-
-
-
-
 const R6API = require('r6api.js');
 const r6api = new R6API('cifotix134@vmgmails.com', 'coolkid988');
 
@@ -1262,25 +1258,15 @@ bot.on("message", async msg=>  {
                 return
 
 
-
-
-
-
         }
-
     }
 
-
-
     //end of bot all main games activated.
-
-
-    
 
 
 })
 
 
 
-'TRN-Api-Key'; '67e7432b-f382-4ea2-a39c-b39d6e59b3d2'
-bot.login(botconfig.token);
+
+bot.login(process.env.token);
