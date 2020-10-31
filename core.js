@@ -3,6 +3,10 @@
 
 //ready to launch.
 
+
+
+//need more error handling: bot wont launch.
+
 //main central commands: api, help, sub helps for all games. 
 
 const botconfig = require("./botconfig.json");
@@ -1269,4 +1273,4 @@ bot.on("message", async msg=>  {
 
 
 
-bot.login(process.env.Token);
+bot.login(process.env.token);
