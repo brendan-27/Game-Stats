@@ -1167,7 +1167,7 @@ bot.on("message", async msg=>  {
 
 
                 .setTimestamp()
-                .setFooter("HyperScape Stats   c!help | ")
+                .setFooter("HyperScape Stats | c!help | ")
 
 
 
@@ -1272,5 +1272,5 @@ bot.on("message", async msg=>  {
 
 
 
-
-bot.login(process.env.token);
+bot.login('NzI0MTY5NDAwMTgxMDYzNzMy.Xu8RTw.MiWBQiqVQ91paaq80U4fympnQd8');
+//bot.login(process.env.token);
