@@ -6,7 +6,7 @@
 
 //launched succsesfully on 11/4/2020 at 9:56:22: reapply init. Need to find VPS.
 
-
+//backs and fixes.
 
 //need more error handling: bot wont launch.
 
